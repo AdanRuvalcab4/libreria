@@ -10,7 +10,7 @@
     <table border="1">
         <tr>
             <th>ID</th>
-            <th>Nombre</th>
+            <th>Nombre AAAAA</th>
             <th>Correo</th>
             <th>Rol</th>
             
