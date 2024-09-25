@@ -7,7 +7,7 @@
     <title>Registrar Libro</title>
 </head>
 <body>
-    <h1>Formulario para registrar un libro {{ $tipo_persona }}</h1>
+    <h1>Formulario para registrar un LIBRO {{ $tipo_persona }}</h1>
 
     @if ($errors->any())
         <div class="alert alert-danger">
