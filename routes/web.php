@@ -15,3 +15,12 @@ Route::get('lista', [RegLibroController::class, 'lista']);
 Route::get('/usuario/{tipo_persona?}', [RegistrarUsuario::class, 'formularioUsuario']);
 Route::post('/registra-usuario', [RegistrarUsuario::class, 'newUsuario']);
 Route::get('lista-usuarios', [RegistrarUsuario::class, 'listaUsuarios']);
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+});
