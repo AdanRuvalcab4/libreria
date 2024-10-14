@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('usuarios', function (Blueprint $table) {
+        Schema::create('reviews', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
-            $table->string('correo');
-            $table->string('password');
-            $table->boolean('rol')->default(0);
+            $table->string('id_user');
+            $table->string('id_book');
+            $table->string('comentario');
+            $table->date('fecha');
+            $table->boolean('aprobado');
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('usuarios');
+        Schema::dropIfExists('reviews');
     }
 };
