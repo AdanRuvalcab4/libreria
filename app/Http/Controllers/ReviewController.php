@@ -2,20 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use app\Models\Review;
+use App\Models\Review;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controllers\HasMiddleware;
-use Illuminate\Routing\Controllers\Middleware;
 
-class ReviewController extends Controller
+
+class ReviewController extends Controller 
 {
-    public static function middleware(): array
+    /*public static function middleware(): array
     {
         return [
             // 'auth',
             new Middleware('auth', except: ['index', 'show']),
             // new Middleware('subscribed', only: ['store']),
         ];
+    }*/
+
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index', 'show']);
     }
 
     public function index()

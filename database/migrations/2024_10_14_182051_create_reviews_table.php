@@ -15,9 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('id_user');
             $table->string('id_book');
-            $table->string('comentario');
+            $table->string('titulo');
+            $table->string('review');
             $table->date('fecha');
-            $table->boolean('aprobado');
+            $table->boolean('aprobado')->default(false);
             $table->timestamps();
         });
     }
