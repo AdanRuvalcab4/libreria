@@ -41,7 +41,13 @@ class ReviewController extends Controller
      */
     public function store(Request $request)
     {
-        // $request->validate([]);
+        $request->validate([
+            'id_user' => 'required|min:3|max:10',
+            'id_book' => 'required|min:3|max:10',
+            'titulo' => 'required|min:3|max:50',
+            'review' => ['required', 'min:10'],
+            'fecha' => 'required|date',
+        ]);
         Review::create($request->all());
 
         return redirect()->route('review.index');
@@ -68,6 +74,14 @@ class ReviewController extends Controller
      */
     public function update(Request $request, Review $review)
     {
+        $request->validate([
+            'id_user' => 'required|min:1|max:10',
+            'id_book' => 'required|min:1|max:10',
+            'titulo' => 'required|min:3|max:50',
+            'review' => ['required', 'min:10'],
+            'fecha' => 'required|date',
+        ]);
+
         $review->update($request->all());
 
         return redirect()->route('review.show', $review);
