@@ -8,5 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Review extends Model
 {
     use HasFactory;
-    protected $fillable = ['id_user', 'id_book', 'titulo', 'review','fecha'];
+    protected $fillable = ['user_id', 'libro_id', 'titulo', 'review','fecha'];
+
+    public function libro()
+    {
+        return $this->belongsTo(Libro::class, 'libro_id'); // 'id_book' es la columna en la tabla reviews
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id'); // 'id_user' es la columna en la tabla reviews
+    }
 }

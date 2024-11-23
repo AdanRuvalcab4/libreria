@@ -7,18 +7,24 @@
     <title>Reviews</title>
 </head>
 <body>
+
     <h1>{{ $review->titulo }}</h1>
+
+    <p>Usuario:</p><h2> {{ $review->user->name }}</h2>
+    <p>Libro:</p><h2> {{ $review->libro->nombre }}</h2>
     <p>
-        {{ $review->review }}
+        Reseña: {{ $review->review }}
     </p>
     <p>
         <ul>
             <li>Fecha: {{ $review->fecha }}</li>
-            <li>Usuario: {{ $review->id_user }}</li>
+            
         </ul>
     </p>
     <hr>
-    <a href="{{ route('review.edit', $review) }}">Editar</a>
+    <a href="{{ route('review.edit', $review) }}">Editar</a><br><br>
+
+    <a href="{{ route('review.index', $review) }}">Regresar a index</a>
     
     <form action="{{ route('review.destroy', $review) }}" method="POST">
         @csrf

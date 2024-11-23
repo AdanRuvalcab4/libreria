@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Review;
+use App\Models\Libro;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 
@@ -24,7 +26,7 @@ class ReviewController extends Controller
 
     public function index()
     {
-        $reviews = Review::all();
+        $reviews = Review::with(['user', 'libro'])->get();
         return view('reviews.index-reviews', compact('reviews'));
     }
 
@@ -33,7 +35,9 @@ class ReviewController extends Controller
      */
     public function create()
     {
-        return view('reviews.create-review');
+        $libros = Libro::all();
+      
+        return view('reviews.create-review', compact('libros'));
     }
 
     /**
@@ -41,14 +45,24 @@ class ReviewController extends Controller
      */
     public function store(Request $request)
     {
+    
+        // Validación de los campos
         $request->validate([
-            'id_user' => 'required|min:3|max:10',
-            'id_book' => 'required|min:3|max:10',
-            'titulo' => 'required|min:3|max:50',
-            'review' => ['required', 'min:10'],
+            'libro_id' => 'required|exists:libros,id', // Verifica que el libro exista en la tabla libros
+            'titulo' => 'required|string|max:255',
+            'review' => 'required|string',
             'fecha' => 'required|date',
         ]);
-        Review::create($request->all());
+
+        // Crear la reseña
+        Review::create([
+            'user_id' => auth()->id(), // Obtiene el ID del usuario autenticado
+            'libro_id' => $request->libro_id,
+            'titulo' => $request->titulo,
+            'review' => $request->review,
+            'fecha' => $request->fecha,
+        ]);
+
 
         return redirect()->route('review.index');
     }
@@ -58,31 +72,41 @@ class ReviewController extends Controller
      */
     public function show(Review $review)
     {
+        $reviews = Review::with(['user', 'libro'])->get();
         return view('reviews.show-review', compact('review'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Review $review)
+    public function edit($id)
     {
-        return view('reviews.edit-review', compact('review'));
+        $review = Review::findOrFail($id);
+        $libros = Libro::all();
+        return view('reviews.edit-review', compact('review', 'libros'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Review $review)
-    {
+    public function update(Request $request, $id)
+{
+        $review = Review::findOrFail($id);
+
         $request->validate([
-            'id_user' => 'required|min:1|max:10',
-            'id_book' => 'required|min:1|max:10',
-            'titulo' => 'required|min:3|max:50',
-            'review' => ['required', 'min:10'],
+            'libro_id' => 'required|exists:libros,id',
+            'titulo' => 'required|string|max:255',
             'fecha' => 'required|date',
+            'review' => 'required|string|max:2000',
         ]);
 
-        $review->update($request->all());
+        $review->update([
+            'libro_id' => $request->libro_id,
+            'titulo' => $request->titulo,
+            'fecha' => $request->fecha,
+            'review' => $request->review,
+        ]);
+
 
         return redirect()->route('review.show', $review);
     }

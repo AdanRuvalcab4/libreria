@@ -16,8 +16,8 @@
     <table border="1">
         <thead>
             <tr>
-                <th>ID_Libro</th>
-                <th>ID_Usuario</th>
+                <th>Libro</th>
+                <th>Usuario</th>
                 <th>Titulo</th>
                 <th>Fecha</th>
                 <th>Review</th>
@@ -29,8 +29,8 @@
         <tbody>
             @foreach($reviews as $review)
             <tr>
-                <td>{{ $review->id_book }}</td>
-                <td>{{ $review->id_user }}</td>
+            <td>{{ $review->libro->nombre }}</td>
+            <td>{{ $review->user->name }}</td>
                 <td>
                     <a href="{{ route('review.show', $review) }}">
                         {{ $review->titulo }}

@@ -13,37 +13,39 @@
         @csrf
         @method('PATCH')
 
-        <label for="id_book">ID_Book:</label><br>
-        <input type="text" name="id_book" value="{{ old('id_book') ?? $review->id_book }}"><br>
-        @error('id_book')
-            <div class="alert alert-danger">{{ $message }}</div>
-        @enderror
-
-        <label for="id_user">ID_Usuario:</label><br>
-        <input type="text" name="id_user" value="{{ old('id_user') ?? $review->id_user }}"><br>
-        @error('id_user')
+        <label for="libro_id">Selecciona un libro:</label><br>
+        <select name="libro_id" required>
+            <option value="{{ old('titulo') ?? $review->libro->nombre }}">-- Selecciona un libro --</option>
+            @foreach($libros as $libro)
+                <option value="{{ $libro->id }}">{{ $libro->nombre }}</option>
+            @endforeach
+        </select><br> 
+        @error('libro_id')
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
 
         <label for="titulo">Titulo:</label><br>
-        <input type="text" name="titulo" value="{{ old('titulo') ?? $review->titulo}}"><br>
+        <input type="text" name="titulo" value="{{ old('titulo') ?? $review->titulo }}"><br>
         @error('titulo')
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
 
         <label for="fecha">Fecha:</label><br>
-        <input type="date" name="fecha" id="fecha" value="{{ old('fecha') ?? $review->fecha }}">
+        <input type="date" name="fecha" id="fecha" value="{{ old('fecha') ?? $review->fecha}}">
         @error('fecha')
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
 
         <br><label for="review">Reseña:</label><br>
-        <textarea name="review" cols="30" rows="4">{{ old('review') ?? $review->review }}</textarea><br>
+        <textarea name="review" cols="30" rows="4">{{ old('review') ?? $review->review}}</textarea><br>
         @error('review')
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
 
         <input type="submit" value="Enviar">
+
+        <a href="{{ route('review.index', $review) }}">Regresar</a>
+        
     </form>
 </body>
 </html>

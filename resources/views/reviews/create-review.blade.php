@@ -22,15 +22,14 @@
     <form action="{{ route('review.store') }}" method="POST">
         @csrf
 
-        <label for="id_book">ID_Book:</label><br>
-        <input type="text" name="id_book" value="{{ old('id_book') }}"><br>
-        @error('id_book')
-            <div class="alert alert-danger">{{ $message }}</div>
-        @enderror
-
-        <label for="id_user">ID_Usuario:</label><br>
-        <input type="text" name="id_user" value="{{ old('id_user') }}"><br>
-        @error('id_user')
+        <label for="libro_id">Selecciona un libro:</label><br>
+        <select name="libro_id" required>
+            <option value="">-- Selecciona un libro --</option>
+            @foreach($libros as $libro)
+                <option value="{{ $libro->id }}">{{ $libro->nombre }}</option>
+            @endforeach
+        </select><br>
+        @error('libro_id')
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
 

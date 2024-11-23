@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\LibroController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -10,6 +11,14 @@ Route::get('/', function () {
 
 Route::resource('review', ReviewController::class)->parameters([
     'review' => 'review'
+]);
+
+Route::resource('order', OrderController::class)->parameters([
+    'order' => 'order'
+]);
+
+Route::resource('libro', LibroController::class)->parameters([
+    'libro' => 'libro'
 ]);
 
 
