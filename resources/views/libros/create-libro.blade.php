@@ -19,7 +19,7 @@
         </div>
     @endif
 
-    <form action="{{ route('libro.store') }}" method="POST">
+    <form action="{{ route('libro.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
 
@@ -42,7 +42,7 @@
         @enderror
 
         <label for="stock">Stock:</label><br>
-        <input type="number" name="stock" value="{{ old('Stock') }}"><br>
+        <input type="number" name="stock" value="{{ old('stock') }}"><br>
         @error('stock')
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
@@ -52,6 +52,9 @@
         @error('descripcion')
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
+
+        <br><br><input type="file" name="imagen" value="{{ old('imagen') }}"><br><br>
+       
 
         <input type="submit" value="Enviar">
     </form>

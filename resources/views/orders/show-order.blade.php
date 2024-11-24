@@ -21,6 +21,7 @@
             <th>Precio Unitario</th>
             <th>Cantidad</th>
             <th>Total</th>
+            <th>Imagen</th>
         </tr>
     </thead>
     <tbody>
@@ -30,6 +31,13 @@
                 <td>{{ $item->precio_unitario }}</td>
                 <td>{{ $item->cantidad }}</td>
                 <td>{{ $item->precio_unitario * $item->cantidad }}</td>
+                <td>
+                    @if($item->libro->imagen)
+                        <img src="/storage/{{ $item->libro->imagen }}"  width="100">
+                    @else
+                        <p>No hay imagen</p>
+                    @endif
+                </td>
             </tr>
         @endforeach
     </tbody>

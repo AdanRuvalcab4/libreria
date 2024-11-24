@@ -2,6 +2,7 @@
 
 @section('title', 'Listado de Libros')
 
+<<<<<<< HEAD
 @section('content')
 <div class="container py-5">
     <!-- Encabezado Principal -->
@@ -91,3 +92,43 @@
 
 </div>
 @endsection
+=======
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Titulo</th>
+                <th>Autor</th>
+                <th>Precio</th>
+                <th>Stock</th>
+                <th>Libro</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($libros as $libro)
+            <tr>
+                <td>
+                    <a href="{{ route('libro.show', $libro) }}">
+                        {{ $libro->nombre }}
+                    </a>
+                </td>
+                <td>{{ $libro->autor }}</td>
+                <td>{{ $libro->precio }}</td>
+                <td>{{ $libro->stock }}</td>
+                <td>
+                    @if($libro->imagen)
+                        <img src="/storage/{{ $libro->imagen }}"  width="100">
+                    @else
+                        <p>No hay imagen</p>
+                    @endif
+                </td>
+                <td>
+                    <a href="{{ route('libro.edit', $libro) }}">Editar</a>
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+</body>
+</html>
+>>>>>>> eb09c86de2dee228ff91066588e272deefbee999
