@@ -2,7 +2,6 @@
 
 @section('title', 'Listado de Libros')
 
-<<<<<<< HEAD
 @section('content')
 <div class="container py-5">
     <!-- Encabezado Principal -->
@@ -44,23 +43,27 @@
                         <!-- Tabla de Libros -->
                         <div class="table-responsive">
                             <table class="table table-bordered table-hover align-middle mb-0">
-                                <thead class="table-light">
+                                <thead class="table-light text-center">
                                     <tr>
-                                        <th scope="col" class="text-uppercase" style="width: 10%;">#</th>
-                                        <th scope="col" class="text-uppercase" style="width: 45%;">Título</th>
-                                        <th scope="col" class="text-uppercase" style="width: 35%;">Autor</th>
+                                        <th scope="col" class="text-uppercase" style="width: 5%;">ID</th>
+                                        <th scope="col" class="text-uppercase" style="width: 35%;">Nombre</th>
+                                        <th scope="col" class="text-uppercase" style="width: 30%;">Autor</th>
+                                        <th scope="col" class="text-uppercase" style="width: 10%;">Precio</th>
+                                        <th scope="col" class="text-uppercase" style="width: 10%;">Stock</th>
                                         <th scope="col" class="text-uppercase" style="width: 10%;">Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($libros as $libro)
                                         <tr>
-                                            <td class="fw-bold">{{ $libro->id }}</td>
-                                            <td class="text-truncate" style="max-width: 250px;">{{ $libro->titulo }}</td>
+                                            <td class="fw-bold text-center">{{ $libro->id }}</td>
+                                            <td class="text-truncate" style="max-width: 250px;">{{ $libro->nombre }}</td>
                                             <td class="text-truncate" style="max-width: 250px;">{{ $libro->autor }}</td>
-                                            <td>
+                                            <td class="text-center">{{ $libro->precio }}</td>
+                                            <td class="text-center">{{ $libro->stock }}</td>
+                                            <td class="text-center">
                                                 <!-- Botón Editar -->
-                                                <a href="{{ route('edit-libro', $libro->id) }}" class="btn btn-warning btn-sm w-100 mb-2">
+                                                <a href="{{ route('libros.edit', $libro->id) }}" class="btn btn-warning btn-sm w-100 mb-2">
                                                     <i class="bi bi-pencil-fill"></i> Editar
                                                 </a>
 
@@ -89,46 +92,5 @@
             </div>
         </div>
     </div>
-
 </div>
 @endsection
-=======
-    <table border="1">
-        <thead>
-            <tr>
-                <th>Titulo</th>
-                <th>Autor</th>
-                <th>Precio</th>
-                <th>Stock</th>
-                <th>Libro</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($libros as $libro)
-            <tr>
-                <td>
-                    <a href="{{ route('libro.show', $libro) }}">
-                        {{ $libro->nombre }}
-                    </a>
-                </td>
-                <td>{{ $libro->autor }}</td>
-                <td>{{ $libro->precio }}</td>
-                <td>{{ $libro->stock }}</td>
-                <td>
-                    @if($libro->imagen)
-                        <img src="/storage/{{ $libro->imagen }}"  width="100">
-                    @else
-                        <p>No hay imagen</p>
-                    @endif
-                </td>
-                <td>
-                    <a href="{{ route('libro.edit', $libro) }}">Editar</a>
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
-</body>
-</html>
->>>>>>> eb09c86de2dee228ff91066588e272deefbee999

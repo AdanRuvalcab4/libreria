@@ -103,6 +103,24 @@
         .footer-icon:hover {
             color: #C5A992;
         }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .user-info img {
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            margin-right: 15px;
+        }
+
+        .user-info div {
+            color: #fff;
+        }
     </style>
 </head>
 
@@ -112,6 +130,16 @@
         <div class="container">
             <h1><i class="bi bi-book"></i> Librería</h1>
             <p class="lead">La mejor plataforma para comprar tus libros</p>
+            
+            @auth
+                <div class="user-info">
+                    <img src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}">
+                    <div>
+                        <span>{{ Auth::user()->name }}</span>
+                        <span>{{ Auth::user()->email }}</span>
+                    </div>
+                </div>
+            @endauth
         </div>
     </header>
 
@@ -142,39 +170,6 @@
 
     <!-- Contenido dinámico -->
     <main class="container py-4">
-        @auth
-            <!-- Contenido para usuarios autenticados -->
-            <div class="shrink-0 me-3">
-                <img class="h-10 w-10 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
-            </div>
-            <div>
-                <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
-                <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
-            </div>
-            <div class="mt-3 space-y-1">
-                <!-- Account Management -->
-                <x-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
-                    {{ __('Profile') }}
-                </x-responsive-nav-link>
-                @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
-                    <x-responsive-nav-link href="{{ route('api-tokens.index') }}" :active="request()->routeIs('api-tokens.index')">
-                        {{ __('API Tokens') }}
-                    </x-responsive-nav-link>
-                @endif
-
-                <!-- Authentication -->
-                <form method="POST" action="{{ route('logout') }}" x-data>
-                    @csrf
-                    <x-responsive-nav-link href="{{ route('logout') }}" @click.prevent="$root.submit();">
-                        {{ __('Log Out') }}
-                    </x-responsive-nav-link>
-                </form>
-            </div>
-        @else
-            <!-- Contenido para usuarios no autenticados -->
-            
-        @endauth
-
         @yield('content') <!-- Aquí se inserta el contenido de cada vista -->
     </main>
 

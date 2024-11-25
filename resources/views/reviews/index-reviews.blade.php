@@ -1,6 +1,6 @@
-@extends('layouts.app') <!-- Extiende la plantilla base -->
+@extends('layouts.app')
 
-@section('title', 'Listado de Reseñas') <!-- Título dinámico -->
+@section('title', 'Listado de Reseñas')
 
 @section('content')
 <div class="container py-5">
@@ -13,7 +13,7 @@
 
     <!-- Botón de Acción Principal -->
     <div class="row mb-4">
-        <div class="col-12 text-end">
+        <div class="col-12 text-center">
             <a href="{{ route('reviews.create') }}" class="btn btn-primary btn-lg shadow-sm w-100 w-md-auto">
                 Agregar Nueva Reseña
             </a>
@@ -27,17 +27,15 @@
                 <div class="card-header bg-primary text-white text-center">
                     <h3 class="mb-0">Listado de Reseñas</h3>
                 </div>
-                <div class="card-body p-0">
+                <div class="card-body p-0 text-center">
                     @if($reviews->isEmpty())
-                        <!-- Mensaje de Vacío -->
                         <div class="text-center p-5">
                             <i class="bi bi-folder-x fs-1 text-muted"></i>
                             <p class="text-muted fs-5">No hay reseñas registradas.</p>
                         </div>
                     @else
-                        <!-- Tabla de Reseñas -->
                         <div class="table-responsive">
-                            <table class="table table-bordered table-hover align-middle mb-0 text-center">
+                            <table class="table table-bordered table-hover align-middle mb-0 mx-auto" style="width: 95%;">
                                 <thead class="table-light">
                                     <tr>
                                         <th scope="col" class="text-uppercase" style="width: 5%;">#</th>
@@ -52,10 +50,10 @@
                                     @foreach ($reviews as $review)
                                         <tr>
                                             <td>{{ $review->id }}</td>
-                                            <td>{{ $review->producto }}</td>
-                                            <td>{{ $review->usuario }}</td>
+                                            <td>{{ $review->libro->nombre }}</td>
+                                            <td>{{ $review->user->name }}</td>
                                             <td>{{ $review->calificacion }}</td>
-                                            <td>{{ $review->comentario }}</td>
+                                            <td>{{ $review->review }}</td>
                                             <td>
                                                 <a href="{{ route('reviews.edit', $review->id) }}" class="btn btn-warning btn-sm w-100 mb-2">
                                                     <i class="bi bi-pencil-fill"></i> Editar
@@ -76,7 +74,6 @@
                     @endif
                 </div>
                 @if($reviews->isNotEmpty())
-                    <!-- Paginación -->
                     <div class="card-footer bg-light text-end" style="height: 75px;">
                         <!-- Puedes añadir elementos dentro de esta sección según lo necesites -->
                     </div>

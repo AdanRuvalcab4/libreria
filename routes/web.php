@@ -39,3 +39,19 @@ Route::get('/reviews', [ReviewController::class, 'index'])->name('index-reviews'
 
 // Añadir la ruta para crear reseñas
 Route::get('/reviews/create', [ReviewController::class, 'create'])->name('reviews.create');
+Route::get('/orders', [OrderController::class, 'index'])->name('index-orders');
+Route::get('/orders', [OrderController::class, 'index'])->name('index-orders');
+Route::get('/reviews/{review}/edit', [ReviewController::class, 'edit'])->name('reviews.edit');
+Route::resource('reviews', 'ReviewController');
+Route::get('/reviews', 'ReviewController@index')->name('index-reviews');
+Route::resource('reviews', 'ReviewController');
+
+Route::resource('reviews', ReviewController::class);
+Route::get('/index-reviews', [ReviewController::class, 'index'])->name('index-reviews');
+Route::resource('libros', LibroController::class);
+Route::get('/index-libros', [LibroController::class, 'index'])->name('index-libros');
+Route::resource('orders', OrderController::class);
+Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+
+Route::get('/orders', [OrderController::class, 'index'])->name('index-orders');
+

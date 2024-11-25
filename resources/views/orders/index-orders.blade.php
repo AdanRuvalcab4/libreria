@@ -32,7 +32,7 @@
                         <i class="bi bi-journal-text"></i> Listado de Órdenes
                     </h3>
                 </div>
-                <div class="card-body p-0">
+                <div class="card-body p-0 text-center">
                     @if($orders->isEmpty())
                         <!-- Mensaje de Vacío -->
                         <div class="text-center p-5">
@@ -42,7 +42,7 @@
                     @else
                         <!-- Tabla de Órdenes -->
                         <div class="table-responsive">
-                            <table class="table table-bordered table-hover align-middle mb-0">
+                            <table class="table table-bordered table-hover align-middle mb-0 mx-auto" style="width: 95%;">
                                 <thead class="table-light">
                                     <tr>
                                         <th scope="col" class="text-uppercase" style="width: 10%;">ID</th>
